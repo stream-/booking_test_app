@@ -27,10 +27,9 @@ class m240821_090941_booking_data extends Migration
                 'is_booked'=> $this->tinyInteger(1)->null()->defaultValue(null),
             ],$tableOptions
         );
-        $this->createIndex('hall_id','{{%booking_data}}',['hall_id'],true);
-        $this->createIndex('user_id','{{%booking_data}}',['user_id'],true);
-        $this->createIndex('hall_id_2','{{%booking_data}}',['hall_id'],true);
-        $this->createIndex('user_id_2','{{%booking_data}}',['user_id'],true);
+        $this->createIndex('hall_id','{{%booking_data}}',['hall_id'],false);
+        $this->createIndex('user_id','{{%booking_data}}',['user_id'],false);
+        
 
     }
 
