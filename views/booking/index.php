@@ -1,0 +1,57 @@
+<?php
+
+use app\models\BookingData;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
+/** @var yii\web\View $this */
+/** @var app\models\BookingSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = Yii::t('app', 'List of your booked halls');
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="booking-data-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
+        <?= Html::a(Yii::t('app', 'Book hall'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php Pjax::begin(); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'hall_name',
+            [
+                'attribute' => 'booking_begin',
+                'filterInputOptions' => [
+                    'type' => 'date', 
+            ],
+            ],
+            [
+                'attribute' => 'booking_end',
+                'filterInputOptions' => [
+                    'type' => 'date', 
+                ]
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'template' => '{view} {delete}',
+                'urlCreator' => function ($action, BookingData $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                 }
+            ],
+        ],
+    ]); ?>
+
+    <?php Pjax::end(); ?>
+
+</div>
