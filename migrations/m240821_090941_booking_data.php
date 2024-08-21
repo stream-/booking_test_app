@@ -37,8 +37,6 @@ class m240821_090941_booking_data extends Migration
     {
         $this->dropIndex('hall_id', '{{%booking_data}}');
         $this->dropIndex('user_id', '{{%booking_data}}');
-        $this->dropIndex('hall_id_2', '{{%booking_data}}');
-        $this->dropIndex('user_id_2', '{{%booking_data}}');
         $this->dropTable('{{%booking_data}}');
     }
 }
